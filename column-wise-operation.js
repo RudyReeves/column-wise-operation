@@ -2,16 +2,14 @@
  * (Problem statement omitted)
  */
 
- const f = ([firstArray, ...rest], operation) => {
-    if (!firstArray) { return []; }
-    return [...firstArray.keys()]
-        .reduce((partialResult, i) =>
-            [
-                ...partialResult,
-                rest.map(a => a[i])
-                    .reduce(operation, firstArray[i])
-            ], []);
-};
+ const f = ([firstArray, ...rest], operation) =>
+ !firstArray ? [] : firstArray
+     .map((_, i) => i)
+     .reduce((partialResult, i) => [
+             ...partialResult,
+             rest.map(a => a[i])
+                 .reduce(operation, firstArray[i])
+         ], []);
 
 const tests = [
     [],
