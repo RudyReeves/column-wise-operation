@@ -2,18 +2,15 @@
  * (Problem statement omitted)
  */
 
-const f = (arrayOfArrays, operation) => {
-    if (arrayOfArrays.length === 0) { return []; }
-    const [firstArray, ...rest] = arrayOfArrays;
-    const numColumns = firstArray.length;
-    const result = [];
-    for (let i = 0; i < numColumns; i++) {
-        result.push(
-            rest.map(a => a[i])
-                .reduce(operation, firstArray[i])
-        );
-    }
-    return result;
+ const f = ([firstArray, ...rest], operation) => {
+    if (!firstArray) { return []; }
+    return [...firstArray.keys()]
+        .reduce((partialResult, i) =>
+            [
+                ...partialResult,
+                rest.map(a => a[i])
+                    .reduce(operation, firstArray[i])
+            ], []);
 };
 
 const tests = [
